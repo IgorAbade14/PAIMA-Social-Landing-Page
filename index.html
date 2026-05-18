@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAIMA Social - Portal Integrado de Engenharia</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'dark',
+            sequence: {
+                diagramMarginX: 20,
+                diagramMarginY: 20,
+                boxTextMargin: 8,
+                noteMargin: 10,
+                messageMargin: 40, // Aumenta o espaçamento vertical entre as setas
+                mirrorActors: true
+            }
+        });
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+
+        .font-mono { 
+            font-family: 'JetBrains Mono', sans-serif; 
+        }
+
+        /* Gradiente customizado do topo */
+        .header-gradient {
+            background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+        }
+
+        /* Efeito de elevação nos cartões interativos */
+        .flow-card:hover {
+            transform: translateY(-4px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Força o diagrama Mermaid a ficar maior e legível */
+        .mermaid-container .mermaid {
+            min-width: 850px; /* Garante que o diagrama não encolha menos que isso */
+            transform: scale(1.05); /* Dá um leve ganho de escala geral */
+            transform-origin: top center;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+    <header class="relative overflow-hidden border-b border-slate-800 bg-slate-900/50 py-12 px-4">
+        <div class="absolute inset-0 header-gradient"></div>
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full">
+                Portal Unificado de Extensão Acadêmica
+            </span>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white mt-4 tracking-tight">
+                Plataforma <span class="text-indigo-500">PAIMA Social</span>
+            </h1>
+            <p class="text-slate-400 mt-3 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                Estudo de viabilidade, arquitetura de infraestrutura e cronograma de implementação para automação de pátios logísticos.
+            </p>
+        </div>
+    </header>
+
+    <div class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 flex justify-center gap-4 py-3">
+            <button onclick="switchTab('visao-geral')" id="btn-visao-geral" class="px-5 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-lg shadow-indigo-500/20">
+                1. Visão Geral & UML
+            </button>
+            <button onclick="switchTab('painel-fluxo')" id="btn-painel-fluxo" class="px-5 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-slate-800 text-slate-400 hover:text-slate-200">
+                2. Cronograma & Pipeline DevOps
+            </button>
+        </div>
+    </div>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-10">
+        
+        <div id="tab-visao-geral" class="space-y-12">
+            <section class="space-y-3">
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <span class="w-1.5 h-6 bg-indigo-500 rounded-full"></span> O Cenário da Extensão
+                </h2>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl text-sm leading-relaxed text-slate-300 space-y-3">
+                    <p>
+                        O projeto simula a modernização da portaria da <strong>COOPROGRESSO</strong> (Cooperativa Regional de Transportes e Logística Comunitária). O fluxo original de triagem, realizado 100% em papel e pranchetas, causava lentidão crônica e riscos patrimoniais.
+                    </p>
+                    <p>
+                        Como desdobramento da plataforma corporativa <strong>PAIMA</strong> original (concebida em PyQt5), a arquitetura foi remodelada para o ecossistema móvel Android utilizando <strong>Python/Kivy</strong>, visando o letramento digital de operadores e custo zero de servidores locais.
+                    </p>
+                </div>
+            </section>
+
+            <section class="space-y-3">
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <span class="w-1.5 h-6 bg-indigo-500 rounded-full"></span> Arquitetura de Interação Lógica (UML)
+                </h2>
+                <p class="text-xs text-slate-400">Mapeamento dinâmico do comportamento assíncrono e resiliência offline do ecossistema. Use a barra de rolagem se necessário.</p>
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl overflow-x-auto mermaid-container flex justify-start md:justify-center">
+                    <div class="mermaid bg-slate-900 text-sm">
+                        sequenceDiagram
+                            autonumber
+                            actor O as Operador (Portaria)
+                            participant A as App (Kivy/Android)
+                            participant C as Cache Local (SQLite)
+                            participant N as Firebase (Nuvem)
+
+                            Note over O,A: Fluxo Principal (Online)
+                            O->>A: Captura feed de vídeo da placa
+                            A->>A: Processa OCR local (ML Kit)
+                            A->>N: Envia string da placa via API
+                            alt Rede Disponível
+                                N-->>A: Retorna Validação (Status)
+                                A-->>O: Feedback Visual (Verde/Vermelho)
+                            else Instabilidade de Rede (Offline First)
+                                Note over A,C: Fluxo de Contingência
+                                A->>C: Armazena registro na fila local
+                                C-->>A: Confirma persistência segura
+                                A-->>O: Alerta: "Modo Offline Ativo"
+                                Note over A,N: Aguardando sinal estável...
+                                A->>A: Monitor de Conectividade dispara
+                                A->>C: Consome dados em cache
+                                A->>N: Realiza upload assíncrono (Sync)
+                                N-->>A: Confirma integridade no Cloud DB
+                            end
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-3">
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <span class="w-1.5 h-6 bg-indigo-500 rounded-full"></span> Engenharia de Confiabilidade (DevOps)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl shadow-md">
+                        <h3 class="text-sm font-bold text-amber-400 font-mono mb-2">RISCO: Instabilidade Crônica de Rede</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Pátios logísticos periféricos sofrem com oscilação de conectividade móvel. A arquitetura implementa persistência local relacional em SQLite embarcado, assegurando 100% de disponibilidade operacional na guarita mesmo sem sinal de internet.
+                        </p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl shadow-md">
+                        <h3 class="text-sm font-bold text-cyan-400 font-mono mb-2">ESTRATÉGIA: Edge Computing</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            A execução do algoritmo de OCR diretamente no hardware do dispositivo móvel otimiza a latência e zera a necessidade de pacotes dispendiosos de processamento em nuvem externa, mantendo a operação sustentável.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="tab-painel-fluxo" class="hidden space-y-12">
+            
+            <section class="space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-2xl font-bold text-white mb-2">Fluxograma de Etapas de Execução do Projeto</h2>
+                    <p class="text-sm text-slate-400">O ciclo de vida planejado e sequenciado para a realização teórico-prática da extensão acadêmica.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+                    <div class="flow-card bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Etapa 01</span>
+                                <span class="bg-cyan-500/10 text-cyan-400 text-[10px] px-2 py-0.5 rounded border border-cyan-500/20 font-mono">Semana 1-3</span>
+                            </div>
+                            <h3 class="font-bold text-white text-sm mb-2">Diagnóstico Teórico</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Mapeamento dos fluxos manuais e vulnerabilidades da Cooperativa COOPROGRESSO.</p>
+                        </div>
+                        <div class="border-t border-slate-800 pt-3 mt-4">
+                            <span class="text-[10px] text-cyan-400 font-mono">Requisitos & Riscos</span>
+                        </div>
+                    </div>
+
+                    <div class="flow-card bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Etapa 02</span>
+                                <span class="bg-purple-500/10 text-purple-400 text-[10px] px-2 py-0.5 rounded border border-purple-500/20 font-mono">Semana 4-10</span>
+                            </div>
+                            <h3 class="font-bold text-white text-sm mb-2">Modelagem e Design</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Construção do protótipo no Figma focado em acessibilidade andragógica.</p>
+                        </div>
+                        <div class="border-t border-slate-800 pt-3 mt-4">
+                            <span class="text-[10px] text-purple-400 font-mono">Feedback UI/UX</span>
+                        </div>
+                    </div>
+
+                    <div class="flow-card bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Etapa 03</span>
+                                <span class="bg-indigo-500/10 text-indigo-400 text-[10px] px-2 py-0.5 rounded border border-indigo-500/20 font-mono">Semana 11-12</span>
+                            </div>
+                            <h3 class="font-bold text-white text-sm mb-2">Planejamento de Arquitetura</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Estruturação de pipeline com Python/Kivy e OCR local.</p>
+                        </div>
+                        <div class="border-t border-slate-800 pt-3 mt-4">
+                            <span class="text-[10px] text-indigo-400 font-mono">Edge & Cloud DB</span>
+                        </div>
+                    </div>
+
+                    <div class="flow-card bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Etapa 04</span>
+                                <span class="bg-amber-500/10 text-amber-400 text-[10px] px-2 py-0.5 rounded border border-amber-500/20 font-mono">Semana 13-14</span>
+                            </div>
+                            <h3 class="font-bold text-white text-sm mb-2">Simulação de Contingência</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Desenvolvimento da matriz de riscos e resiliência Offline First.</p>
+                        </div>
+                        <div class="border-t border-slate-800 pt-3 mt-4">
+                            <span class="text-[10px] text-amber-400 font-mono">SRE & Resiliência</span>
+                        </div>
+                    </div>
+
+                    <div class="flow-card bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Etapa 05</span>
+                                <span class="bg-emerald-500/10 text-emerald-400 text-[10px] px-2 py-0.5 rounded border border-emerald-500/20 font-mono">Semana 15-16</span>
+                            </div>
+                            <h3 class="font-bold text-white text-sm mb-2">Análise de Viabilidade</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Consolidação de indicadores e validação do retorno técnico-social.</p>
+                        </div>
+                        <div class="border-t border-slate-800 pt-3 mt-4">
+                            <span class="text-[10px] text-emerald-400 font-mono">Métricas</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-2xl font-bold text-white mb-2">Pipeline de Dados & Resiliência da Infraestrutura</h2>
+                    <p class="text-sm text-slate-400">Desenho da viagem de dados (Blueprint DevOps). Clique nas etapas do fluxo abaixo para entender as regras de resiliência.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <div onclick="showDetail('captura')" class="cursor-pointer bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-2xl p-5 transition-all duration-300 group">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812-1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <span class="text-xs font-mono text-slate-500">01</span>
+                        </div>
+                        <h3 class="font-bold text-white text-sm mb-1">Câmera Android (Edge)</h3>
+                        <p class="text-[11px] text-slate-400">Captura o feed de vídeo local no dispositivo móvel do operador.</p>
+                    </div>
+
+                    <div onclick="showDetail('ocr')" class="cursor-pointer bg-slate-900 border border-slate-800 hover:border-purple-500 rounded-2xl p-5 transition-all duration-300 group">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <span class="text-xs font-mono text-slate-500">02</span>
+                        </div>
+                        <h3 class="font-bold text-white text-sm mb-1">OCR Local (ML Kit)</h3>
+                        <p class="text-[11px] text-slate-400">Processa os dados de placas na ponta, economizando internet corporativa.</p>
+                    </div>
+
+                    <div onclick="showDetail('contingencia')" class="cursor-pointer bg-slate-900 border border-slate-800 hover:border-amber-500 rounded-2xl p-5 transition-all duration-300 group">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            </div>
+                            <span class="text-xs font-mono text-slate-500">03</span>
+                        </div>
+                        <h3 class="font-bold text-white text-sm mb-1">Fila Local Offline</h3>
+                        <p class="text-[11px] text-slate-400">Retém dados em cache local se a internet cair, prevenindo travamentos.</p>
+                    </div>
+
+                    <div onclick="showDetail('firebase')" class="cursor-pointer bg-slate-900 border border-slate-800 hover:border-emerald-500 rounded-2xl p-5 transition-all duration-300 group">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                            </div>
+                            <span class="text-xs font-mono text-slate-500">04</span>
+                        </div>
+                        <h3 class="font-bold text-white text-sm mb-1">Firebase Cloud DB</h3>
+                        <p class="text-[11px] text-slate-400">Sincroniza os dados históricos com a nuvem de forma assíncrona.</p>
+                    </div>
+                </div>
+
+                <div id="technical-details" class="bg-indigo-950/20 border border-indigo-500/20 rounded-2xl p-6 transition-all duration-300">
+                    <h3 id="details-title" class="text-base font-bold text-white mb-2">Selecione uma etapa do pipeline acima</h3>
+                    <p id="details-text" class="text-xs text-slate-300 leading-relaxed">Clique em qualquer um dos cards de pipeline para ler a descrição técnica de planejamento DevOps, projetada para manter o sistema PAIMA Social funcionando de forma econômica e ininterrupta.</p>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>© 2026 - Extensão Acadêmica PAIMA Social | Igor Andrade Abade</p>
+            <div class="flex gap-4">
+                <span class="text-slate-400 font-mono"> Estácio Campus Queimados </span>
+                <span class="text-slate-400 font-mono"> Programação Para Dispositivos Móveis em Android </span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
