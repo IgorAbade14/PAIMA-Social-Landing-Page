@@ -1,6 +1,6 @@
 # PAIMA Social - Portal Integrado de Engenharia
 
-Este repositório foi desenvolvido como parte integrante do **Trabalho de Extensão Acadêmica** da disciplina de DevOps e Infraestrutura da **Firjan SENAI Maracanã**. 
+Este repositório foi desenvolvido como parte integrante do **Trabalho de Extensão Acadêmica** da disciplina de DevOps e Infraestrutura da **Faculdade Estácio Campus Queimados**, na disciplina **Programação Para Dispositivos Móveis em Android**. 
 
 O projeto estende o conceito da plataforma corporativa original PAIMA, aplicando técnicas avançadas de infraestrutura e engenharia de software para resolver um problema real de impacto social e operacional.
 
