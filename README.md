@@ -6,7 +6,9 @@ O projeto estende o conceito da plataforma corporativa original PAIMA, aplicando
 
 ## 🎯 Contexto do Projeto de Extensão
 
-O estudo de caso foca na modernização da portaria da **COOPROGRESSO** (Cooperativa Regional de Transportes e Logística Comunitária). O objetivo principal é demonstrar a viabilidade técnica e financeira da transição de fluxos analógicos (papel/prancheta) para um ecossistema digital móvel resiliente, promovendo a inclusão digital dos operadores e a eficiência logística comunitária, a criação e planejamento foi feito pela minha perspectiva como Engenheiro DevOps, onde realizei o planejamento de todo o projeto e como ele iria funcionar, não possui versão fisica do projeto pois ele é totalmente conceitual, e criado por cima de outro projeto criado em 2024, para compreender melhor o projeto, abra e leia o pdf fixado do repositório.
+O estudo de caso foca na modernização da portaria da **COOPROGRESSO** (Cooperativa Regional de Transportes e Logística Comunitária). O objetivo principal é demonstrar a viabilidade técnica e financeira da transição de fluxos analógicos (papel/prancheta) para um ecossistema digital móvel resiliente, promovendo a inclusão digital dos operadores e a eficiência logística comunitária
+
+A criação e planejamento foi feito pela minha perspectiva como Engenheiro DevOps, onde realizei o planejamento de todo o projeto e como ele iria funcionar, não possui versão fisica do projeto pois ele é totalmente conceitual, e criado por cima de outro projeto criado em 2024, para compreender melhor o projeto, abra e leia o pdf fixado do repositório junto com o fluxograma do sistema.
 
 ## 🏗️ Pilares Tecnológicos & DevOps Demonstrados
 
